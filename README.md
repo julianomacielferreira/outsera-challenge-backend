@@ -1,6 +1,6 @@
 # Outsera Backend Challenge
 
-Desenvolver uma API RESTful em Spring Boot 3 para possibilitar a leitura da lista de indicados e vencedores da
+Desenvolver uma API REST em Spring Boot 3 para possibilitar a leitura da lista de indicados e vencedores da
 categoria Pior Filme do Golden Raspberry Awards.
 
 ## Requisitos da API
@@ -46,4 +46,45 @@ prêmios mais rápido, seguindo a especificação de formato definida.
                     └── api
                         └── ApplicationTests.java
 
+```
+
+## Rodando a api
+
+Pré-requisitos:
+
+- Java Development Kit (JDK) 17 ou superior instalado em sua máquina
+
+Torne o arquivo ``mvnw`` executável:
+
+```bash
+$ chmod +x mvnw
+```
+
+Execute o seguinte comando na raíz do projeto:
+
+```bash
+$ ./mvnw spring-boot:run
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.outsera:api >---------------------------
+[INFO] Building api 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+...
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+
+2025-10-01T12:54:18.051-03:00  INFO 3864347 --- [api] [           main] com.outsera.api.ApiApplication           : Starting ApiApplication using Java 17.0.16 with PID 3864347 (/home/juliano/Public/outsera-challenge-backend/target/classes started by juliano in /home/juliano/Public/outsera-challenge-backend)
+2025-10-01T12:54:18.054-03:00  INFO 3864347 --- [api] [           main] com.outsera.api.ApiApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-10-01T12:54:18.469-03:00  INFO 3864347 --- [api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-01T12:54:18.485-03:00  INFO 3864347 --- [api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
+2025-10-01T12:54:18.800-03:00  INFO 3864347 --- [api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
 ```
