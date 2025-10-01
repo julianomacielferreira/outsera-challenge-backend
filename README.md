@@ -34,8 +34,8 @@ prêmios mais rápido, seguindo a especificação de formato definida.
     │   │                   ├── Movie.java
     │   │                   ├── MovieRepository.java
     │   │                   ├── MovieService.java
-    │   │                   └── util
-    │   │                       └── ProducerInterval.java
+    │   │                   └── producer
+    │   │                       └── ProducerDTO.java
     │   └── resources
     │       ├── application.properties
     │       ├── data
@@ -49,7 +49,6 @@ prêmios mais rápido, seguindo a especificação de formato definida.
                 └── outsera
                     └── api
                         └── ApplicationTests.java
-
 ```
 
 ## Rodando a API

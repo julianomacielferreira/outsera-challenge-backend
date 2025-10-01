@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.outsera.api.movies.util;
+package com.outsera.api.movies.producer;
 
-public class ProducerInterval {
+public class ProducerDTO {
 
     private String producer;
     private int interval;
     private int previousWin;
     private int followingWin;
 
-    public ProducerInterval(String producer, int interval, int previousWin, int followingWin) {
+    public ProducerDTO(String producer, int interval, int previousWin, int followingWin) {
         this.producer = producer;
         this.interval = interval;
         this.previousWin = previousWin;

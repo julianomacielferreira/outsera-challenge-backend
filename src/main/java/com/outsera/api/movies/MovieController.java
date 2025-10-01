@@ -23,7 +23,7 @@
  */
 package com.outsera.api.movies;
 
-import com.outsera.api.movies.util.ProducerInterval;
+import com.outsera.api.movies.producer.ProducerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +40,7 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping("")
-    public Map<String, List<ProducerInterval>> findAll() {
+    public Map<String, List<ProducerDTO>> findAll() {
         return this.movieService.getMovieProducers();
     }
 

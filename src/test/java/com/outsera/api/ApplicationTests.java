@@ -26,7 +26,7 @@ package com.outsera.api;
 import com.outsera.api.movies.Movie;
 import com.outsera.api.movies.MovieRepository;
 import com.outsera.api.movies.MovieService;
-import com.outsera.api.movies.util.ProducerInterval;
+import com.outsera.api.movies.producer.ProducerDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,17 +70,17 @@ class ApplicationTests {
 
     @Test
     public void testGetWinnerProducers() {
-        Map<String, List<ProducerInterval>> result = movieService.getMovieProducers();
+        Map<String, List<ProducerDTO>> result = movieService.getMovieProducers();
 
         assertNotNull(result);
         assertTrue(result.containsKey("min"));
         assertTrue(result.containsKey("max"));
 
-        List<ProducerInterval> minIntervals = result.get("min");
+        List<ProducerDTO> minIntervals = result.get("min");
         assertNotNull(minIntervals);
         assertEquals(1, minIntervals.size());
 
-        ProducerInterval minInterval = minIntervals.get(0);
+        ProducerDTO minInterval = minIntervals.get(0);
         assertEquals("Jack Giarraputo and Adam Sandler", minInterval.getProducer());
         assertEquals(2, minInterval.getInterval());
         assertEquals(2011, minInterval.getPreviousWin());

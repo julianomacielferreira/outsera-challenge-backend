@@ -23,7 +23,7 @@
  */
 package com.outsera.api.movies;
 
-import com.outsera.api.movies.util.ProducerInterval;
+import com.outsera.api.movies.producer.ProducerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,12 +36,12 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    public Map<String, List<ProducerInterval>> getMovieProducers() {
+    public Map<String, List<ProducerDTO>> getMovieProducers() {
 
         List<Movie> winners = movieRepository.findWinnerProducers();
 
         Map<String, List<Integer>> producerYears = getProducerYears(winners);
-        Map<String, List<ProducerInterval>> intervals = calculateIntervals(producerYears);
+        Map<String, List<ProducerDTO>> intervals = calculateIntervals(producerYears);
 
         return intervals;
     }
@@ -62,9 +62,9 @@ public class MovieService {
         return producerYears;
     }
 
-    private Map<String, List<ProducerInterval>> calculateIntervals(Map<String, List<Integer>> producerYears) {
+    private Map<String, List<ProducerDTO>> calculateIntervals(Map<String, List<Integer>> producerYears) {
 
-        List<ProducerInterval> intervals = new ArrayList<>();
+        List<ProducerDTO> intervals = new ArrayList<>();
 
         for (Map.Entry<String, List<Integer>> entry : producerYears.entrySet()) {
             intervals.addAll(calculateProducerIntervals(entry.getKey(), entry.getValue()));
@@ -73,35 +73,35 @@ public class MovieService {
         return getMinAndMaxIntervals(intervals);
     }
 
-    private List<ProducerInterval> calculateProducerIntervals(String producer, List<Integer> years) {
+    private List<ProducerDTO> calculateProducerIntervals(String producer, List<Integer> years) {
 
-        List<ProducerInterval> intervals = new ArrayList<>();
+        List<ProducerDTO> intervals = new ArrayList<>();
 
         if (years.size() > 1) {
             Collections.sort(years);
             for (int i = 0; i < years.size() - 1; i++) {
                 int interval = years.get(i + 1) - years.get(i);
-                intervals.add(new ProducerInterval(producer, interval, years.get(i), years.get(i + 1)));
+                intervals.add(new ProducerDTO(producer, interval, years.get(i), years.get(i + 1)));
             }
         }
 
         return intervals;
     }
 
-    private Map<String, List<ProducerInterval>> getMinAndMaxIntervals(List<ProducerInterval> intervals) {
+    private Map<String, List<ProducerDTO>> getMinAndMaxIntervals(List<ProducerDTO> intervals) {
 
-        int minInterval = intervals.stream().mapToInt(ProducerInterval::getInterval).min().orElse(Integer.MAX_VALUE);
-        int maxInterval = intervals.stream().mapToInt(ProducerInterval::getInterval).max().orElse(0);
+        int minInterval = intervals.stream().mapToInt(ProducerDTO::getInterval).min().orElse(Integer.MAX_VALUE);
+        int maxInterval = intervals.stream().mapToInt(ProducerDTO::getInterval).max().orElse(0);
 
-        List<ProducerInterval> minIntervals = intervals.stream()
+        List<ProducerDTO> minIntervals = intervals.stream()
                 .filter(interval -> interval.getInterval() == minInterval)
                 .collect(Collectors.toList());
 
-        List<ProducerInterval> maxIntervals = intervals.stream()
+        List<ProducerDTO> maxIntervals = intervals.stream()
                 .filter(interval -> interval.getInterval() == maxInterval)
                 .collect(Collectors.toList());
 
-        Map<String, List<ProducerInterval>> result = new HashMap<>();
+        Map<String, List<ProducerDTO>> result = new HashMap<>();
         result.put("min", minIntervals);
         result.put("max", maxIntervals);
 
