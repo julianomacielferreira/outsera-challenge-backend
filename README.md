@@ -55,15 +55,22 @@ prêmios mais rápido, seguindo a especificação de formato definida.
 
 Pré-requisitos:
 
-- Java Development Kit (JDK) 17 ou superior instalado em sua máquina
+- Java Development Kit (JDK) 17 ou superior instalado em sua máquina:
 
-Torne o arquivo ``mvnw`` executável:
+```bash
+$ java -version
+openjdk version "17.0.16" 2025-07-15
+OpenJDK Runtime Environment (build 17.0.16+8-Ubuntu-0ubuntu122.04.1)
+OpenJDK 64-Bit Server VM (build 17.0.16+8-Ubuntu-0ubuntu122.04.1, mixed mode, sharing)
+```
+
+Torne o arquivo ``mvnw``, no diretório raíz do projeto, executável:
 
 ```bash
 $ chmod +x mvnw
 ```
 
-Execute o seguinte comando na raíz do projeto:
+Execute o seguinte comando no diretório raiz do projeto:
 
 ```bash
 $ ./mvnw spring-boot:run
