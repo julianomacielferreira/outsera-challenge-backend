@@ -23,6 +23,7 @@
  */
 package com.outsera.api.movies;
 
+import com.outsera.api.movies.util.ProducerInterval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

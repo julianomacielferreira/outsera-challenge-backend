@@ -26,7 +26,7 @@ package com.outsera.api;
 import com.outsera.api.movies.Movie;
 import com.outsera.api.movies.MovieRepository;
 import com.outsera.api.movies.MovieService;
-import com.outsera.api.movies.ProducerInterval;
+import com.outsera.api.movies.util.ProducerInterval;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
