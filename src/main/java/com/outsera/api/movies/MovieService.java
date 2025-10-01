@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -39,55 +40,9 @@ public class MovieService {
         List<Movie> winners = movieRepository.findWinnerProducers();
 
         Map<String, List<Integer>> producerYears = getProducerYears(winners);
+        Map<String, List<ProducerInterval>> intervals = calculateIntervals(producerYears);
 
-        List<ProducerInterval> minIntervals = new ArrayList<>();
-        List<ProducerInterval> maxIntervals = new ArrayList<>();
-
-        int minInterval = Integer.MAX_VALUE;
-        int maxInterval = 0;
-
-        for (Map.Entry<String, List<Integer>> producerYear : producerYears.entrySet()) {
-
-            List<Integer> years = producerYear.getValue();
-
-            if (years.size() > 1) {
-
-                Collections.sort(years);
-
-                for (int i = 0; i < years.size() - 1; i++) {
-
-                    Integer followingWin = years.get(i + 1);
-                    Integer previousWin = years.get(i);
-
-                    int interval = followingWin - previousWin;
-
-                    ProducerInterval producerInterval = new ProducerInterval(producerYear.getKey(), interval, previousWin, followingWin);
-
-                    if (interval < minInterval) {
-                        minInterval = interval;
-                        minIntervals.clear();
-                        minIntervals.add(producerInterval);
-                    } else if (interval == minInterval) {
-                        minIntervals.add(producerInterval);
-                    }
-
-                    if (interval > maxInterval) {
-                        maxInterval = interval;
-                        maxIntervals.clear();
-                        maxIntervals.add(producerInterval);
-                    } else if (interval == maxInterval) {
-                        maxIntervals.add(producerInterval);
-                    }
-                }
-            }
-
-        }
-
-        Map<String, List<ProducerInterval>> result = new HashMap<>();
-        result.put("min", minIntervals);
-        result.put("max", maxIntervals);
-
-        return result;
+        return intervals;
     }
 
     private Map<String, List<Integer>> getProducerYears(List<Movie> winners) {
@@ -95,12 +50,60 @@ public class MovieService {
         Map<String, List<Integer>> producerYears = new HashMap<>();
 
         for (Movie movie : winners) {
+
             String[] producers = movie.getProducers().split(",");
+
             for (String producer : producers) {
                 producer = producer.trim();
                 producerYears.computeIfAbsent(producer, k -> new ArrayList<>()).add(movie.getYear());
             }
         }
         return producerYears;
+    }
+
+    private Map<String, List<ProducerInterval>> calculateIntervals(Map<String, List<Integer>> producerYears) {
+
+        List<ProducerInterval> intervals = new ArrayList<>();
+
+        for (Map.Entry<String, List<Integer>> entry : producerYears.entrySet()) {
+            intervals.addAll(calculateProducerIntervals(entry.getKey(), entry.getValue()));
+        }
+
+        return getMinAndMaxIntervals(intervals);
+    }
+
+    private List<ProducerInterval> calculateProducerIntervals(String producer, List<Integer> years) {
+
+        List<ProducerInterval> intervals = new ArrayList<>();
+
+        if (years.size() > 1) {
+            Collections.sort(years);
+            for (int i = 0; i < years.size() - 1; i++) {
+                int interval = years.get(i + 1) - years.get(i);
+                intervals.add(new ProducerInterval(producer, interval, years.get(i), years.get(i + 1)));
+            }
+        }
+
+        return intervals;
+    }
+
+    private Map<String, List<ProducerInterval>> getMinAndMaxIntervals(List<ProducerInterval> intervals) {
+
+        int minInterval = intervals.stream().mapToInt(ProducerInterval::getInterval).min().orElse(Integer.MAX_VALUE);
+        int maxInterval = intervals.stream().mapToInt(ProducerInterval::getInterval).max().orElse(0);
+
+        List<ProducerInterval> minIntervals = intervals.stream()
+                .filter(interval -> interval.getInterval() == minInterval)
+                .collect(Collectors.toList());
+
+        List<ProducerInterval> maxIntervals = intervals.stream()
+                .filter(interval -> interval.getInterval() == maxInterval)
+                .collect(Collectors.toList());
+
+        Map<String, List<ProducerInterval>> result = new HashMap<>();
+        result.put("min", minIntervals);
+        result.put("max", maxIntervals);
+
+        return result;
     }
 }
