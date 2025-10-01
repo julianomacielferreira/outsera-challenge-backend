@@ -3,6 +3,8 @@
 Desenvolver uma API REST em Spring Boot 3 para possibilitar a leitura da lista de indicados e vencedores da
 categoria Pior Filme do Golden Raspberry Awards.
 
+O arquivo CVS [movies.csv](./src/main/resources/data/movies.csv) contém a lista de filmes e demais informações.
+
 ## Requisitos da API
 
 Obter o produtor com maior intervalo entre dois prêmios consecutivos, e o que obteve dois
@@ -48,7 +50,7 @@ prêmios mais rápido, seguindo a especificação de formato definida.
 
 ```
 
-## Rodando a api
+## Rodando a API
 
 Pré-requisitos:
 
@@ -64,13 +66,19 @@ Execute o seguinte comando na raíz do projeto:
 
 ```bash
 $ ./mvnw spring-boot:run
+```
 
+A saída será algo como:
+
+```bash
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] --------------------------< com.outsera:api >---------------------------
 [INFO] Building api 0.0.1-SNAPSHOT
 [INFO]   from pom.xml
+
 ...
+
 [INFO] Attaching agents: []
 
   .   ____          _            __ _ _
@@ -87,6 +95,73 @@ $ ./mvnw spring-boot:run
 2025-10-01T12:54:18.469-03:00  INFO 3864347 --- [api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
 2025-10-01T12:54:18.485-03:00  INFO 3864347 --- [api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
 2025-10-01T12:54:18.800-03:00  INFO 3864347 --- [api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+```
+
+## Testando a API
+
+Execute o seguinte comando na raíz do projeto:
+
+```bash
+$ ./mvnw test
+````
+
+A saída será algo como:
+
+```bash
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.outsera:api >---------------------------
+[INFO] Building api 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ api ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ api ---
+[INFO] skip non existing resourceDirectory /home/juliano/Public/outsera-challenge-backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ api ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.outsera.api.ApplicationTests
+18:59:56.701 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.outsera.api.ApplicationTests]: ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:59:56.797 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.outsera.api.Application for test class com.outsera.api.ApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+ 
+...
+
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.555 s -- in com.outsera.api.ApplicationTests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.191 s
+[INFO] Finished at: 2025-10-01T18:55:20-03:00
+[INFO] ------------------------------------------------------------------------
+
 ```
 
 ## Endpoint
