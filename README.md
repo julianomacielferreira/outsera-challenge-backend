@@ -10,7 +10,7 @@ O arquivo CVS [movies.csv](./src/main/resources/data/movies.csv) contém a lista
 Obter o produtor com maior intervalo entre dois prêmios consecutivos, e o que obteve dois
 prêmios mais rápido, seguindo a especificação de formato definida.
 
-## Estrutura de Arquivos do Projeto
+## Estrutura de Arquivos
 
 ```
 .
