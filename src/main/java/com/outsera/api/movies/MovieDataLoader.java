@@ -32,9 +32,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 @Component
 public class MovieDataLoader implements CommandLineRunner {
@@ -43,12 +41,9 @@ public class MovieDataLoader implements CommandLineRunner {
     private Resource resource;
 
     @Autowired
-    MovieService movieService;
+    private MovieRepository movieRepository;
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-
-    public MovieDataLoader() {
-    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -57,7 +52,7 @@ public class MovieDataLoader implements CommandLineRunner {
 
             LOGGER.info("Loading movies into the database from CSV: {}", resource.getFilename());
 
-            movieService.loadMoviesFromCSV(new MultipartFile() {
+            loadMoviesFromCSV(new MultipartFile() {
                 @Override
                 public String getName() {
                     return resource.getFilename();
@@ -105,6 +100,29 @@ public class MovieDataLoader implements CommandLineRunner {
 
         } catch (Exception exception) {
             exception.printStackTrace();
+        }
+    }
+
+    private void loadMoviesFromCSV(MultipartFile file) throws IOException {
+
+        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+
+            String line;
+
+            buffer.readLine();
+
+            while ((line = buffer.readLine()) != null) {
+                String[] data = line.split(";");
+
+                Movie movie = new Movie();
+                movie.setYear(Integer.parseInt(data[0]));
+                movie.setTitle(data[1]);
+                movie.setStudios(data[2]);
+                movie.setProducers(data[3]);
+                movie.setWinner((data.length > 4 && data[4] != null));
+
+                movieRepository.save(movie);
+            }
         }
     }
 }
