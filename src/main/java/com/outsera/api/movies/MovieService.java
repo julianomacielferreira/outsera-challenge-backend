@@ -81,8 +81,12 @@ public class MovieService {
         if (years.size() > 1) {
             Collections.sort(years);
             for (int i = 0; i < years.size() - 1; i++) {
-                int interval = years.get(i + 1) - years.get(i);
-                intervals.add(new ProducerDTO(producer, interval, years.get(i), years.get(i + 1)));
+
+                int previousWin = years.get(i);
+                int followingWin = years.get(i + 1);
+                int interval = followingWin - previousWin;
+
+                intervals.add(new ProducerDTO(producer, interval, previousWin, followingWin));
             }
         }
 
