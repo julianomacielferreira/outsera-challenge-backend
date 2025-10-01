@@ -38,7 +38,7 @@ public class MovieService {
 
     public Map<String, List<ProducerDTO>> getMovieProducers() {
 
-        List<Movie> winners = movieRepository.findWinnerProducers();
+        List<Movie> winners = movieRepository.findWinnerMovies();
 
         Map<String, List<Integer>> producerYears = getProducerYears(winners);
         Map<String, List<ProducerDTO>> intervals = calculateIntervals(producerYears);

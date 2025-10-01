@@ -31,5 +31,5 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query("SELECT m FROM Movie m WHERE m.winner = true ORDER BY m.year")
-    List<Movie> findWinnerProducers();
+    List<Movie> findWinnerMovies();
 }
