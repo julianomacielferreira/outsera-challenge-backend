@@ -88,3 +88,43 @@ $ ./mvnw spring-boot:run
 2025-10-01T12:54:18.485-03:00  INFO 3864347 --- [api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
 2025-10-01T12:54:18.800-03:00  INFO 3864347 --- [api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
 ```
+
+## Endpoint
+
+- **`GET` /api/movies**
+
+```bash
+$ curl --location 'http://localhost:8080/api/movies'
+```
+
+<details>
+<summary><b>Response</b></summary>
+
+```json
+{
+  "min": [
+    {
+      "producer": "Bo Derek",
+      "interval": 6,
+      "previousWin": 1984,
+      "followingWin": 1990
+    }
+  ],
+  "max": [
+    {
+      "producer": "Matthew Vaughn",
+      "interval": 13,
+      "previousWin": 2002,
+      "followingWin": 2015
+    }
+  ]
+}
+```
+</details>
+
+---
+
+## Referências
+
+- [**Spring Boot**](https://spring.io/projects/spring-boot)
+- [**IntelliJ IDEA Community Edition**](https://www.jetbrains.com/idea/download/?section=linux)
