@@ -38,19 +38,7 @@ public class MovieService {
 
         List<Movie> winners = movieRepository.findWinnerProducers();
 
-        Map<String, List<Integer>> producerYears = new HashMap<>();
-
-        for (Movie movie : winners) {
-
-            String[] producers = movie.getProducers().split(",");
-
-            for (String producer : producers) {
-
-                producer = producer.trim();
-
-                producerYears.computeIfAbsent(producer, key -> new ArrayList<>()).add(movie.getYear());
-            }
-        }
+        Map<String, List<Integer>> producerYears = getProducerYears(winners);
 
         List<ProducerInterval> minIntervals = new ArrayList<>();
         List<ProducerInterval> maxIntervals = new ArrayList<>();
@@ -100,5 +88,19 @@ public class MovieService {
         result.put("max", maxIntervals);
 
         return result;
+    }
+
+    private Map<String, List<Integer>> getProducerYears(List<Movie> winners) {
+
+        Map<String, List<Integer>> producerYears = new HashMap<>();
+
+        for (Movie movie : winners) {
+            String[] producers = movie.getProducers().split(",");
+            for (String producer : producers) {
+                producer = producer.trim();
+                producerYears.computeIfAbsent(producer, k -> new ArrayList<>()).add(movie.getYear());
+            }
+        }
+        return producerYears;
     }
 }
