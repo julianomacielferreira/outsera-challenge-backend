@@ -53,11 +53,8 @@ public class MovieService {
                 movie.setTitle(data[1]);
                 movie.setStudios(data[2]);
                 movie.setProducers(data[3]);
+                movie.setWinner((data.length > 4 && data[4] != null));
 
-                if (data.length > 4 && data[4] != null) {
-                    movie.setWinner(true);
-                }
-                
                 movieRepository.save(movie);
             }
         }
