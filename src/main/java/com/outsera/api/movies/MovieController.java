@@ -39,7 +39,7 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping("")
-    public Map<String, List<MovieService.ProducerInterval>> findAll() {
+    public Map<String, List<ProducerInterval>> findAll() {
         return this.movieService.getMovieProducers();
     }
 
