@@ -25,11 +25,8 @@ package com.outsera.api.movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.*;
 
 @Service
 public class MovieService {
@@ -37,26 +34,71 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    public void loadMoviesFromCSV(MultipartFile file) throws IOException {
+    public Map<String, List<ProducerInterval>> getMovieProducers() {
 
-        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+        List<Movie> winners = movieRepository.findWinnerProducers();
 
-            String line;
+        Map<String, List<Integer>> producerYears = new HashMap<>();
 
-            buffer.readLine();
+        for (Movie movie : winners) {
 
-            while ((line = buffer.readLine()) != null) {
-                String[] data = line.split(";");
+            String[] producers = movie.getProducers().split(",");
 
-                Movie movie = new Movie();
-                movie.setYear(Integer.parseInt(data[0]));
-                movie.setTitle(data[1]);
-                movie.setStudios(data[2]);
-                movie.setProducers(data[3]);
-                movie.setWinner((data.length > 4 && data[4] != null));
+            for (String producer : producers) {
 
-                movieRepository.save(movie);
+                producer = producer.trim();
+
+                producerYears.computeIfAbsent(producer, key -> new ArrayList<>()).add(movie.getYear());
             }
         }
+
+        List<ProducerInterval> minIntervals = new ArrayList<>();
+        List<ProducerInterval> maxIntervals = new ArrayList<>();
+
+        int minInterval = Integer.MAX_VALUE;
+        int maxInterval = 0;
+
+        for (Map.Entry<String, List<Integer>> producerYear : producerYears.entrySet()) {
+
+            List<Integer> years = producerYear.getValue();
+
+            if (years.size() > 1) {
+
+                Collections.sort(years);
+
+                for (int i = 0; i < years.size() - 1; i++) {
+
+                    Integer followingWin = years.get(i + 1);
+                    Integer previousWin = years.get(i);
+
+                    int interval = followingWin - previousWin;
+
+                    ProducerInterval producerInterval = new ProducerInterval(producerYear.getKey(), interval, previousWin, followingWin);
+
+                    if (interval < minInterval) {
+                        minInterval = interval;
+                        minIntervals.clear();
+                        minIntervals.add(producerInterval);
+                    } else if (interval == minInterval) {
+                        minIntervals.add(producerInterval);
+                    }
+
+                    if (interval > maxInterval) {
+                        maxInterval = interval;
+                        maxIntervals.clear();
+                        maxIntervals.add(producerInterval);
+                    } else if (interval == maxInterval) {
+                        maxIntervals.add(producerInterval);
+                    }
+                }
+            }
+
+        }
+
+        Map<String, List<ProducerInterval>> result = new HashMap<>();
+        result.put("min", minIntervals);
+        result.put("max", maxIntervals);
+
+        return result;
     }
 }
