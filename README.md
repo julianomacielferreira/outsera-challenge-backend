@@ -3,7 +3,7 @@
 Desenvolver uma API REST em Spring Boot 3 para possibilitar a leitura da lista de indicados e vencedores da
 categoria Pior Filme do Golden Raspberry Awards.
 
-O arquivo CVS [movies.csv](./src/main/resources/data/movies.csv) contém a lista de filmes e demais informações.
+O arquivo [movies.csv](./src/main/resources/data/movies.csv) contém a lista de filmes e demais informações.
 
 ## Requisitos da API
 
