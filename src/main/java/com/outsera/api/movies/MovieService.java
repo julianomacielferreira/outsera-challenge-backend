@@ -59,6 +59,7 @@ public class MovieService {
                 producerYears.computeIfAbsent(producer, k -> new ArrayList<>()).add(movie.getYear());
             }
         }
+
         return producerYears;
     }
 
