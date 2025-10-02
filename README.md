@@ -5,7 +5,7 @@ categoria Pior Filme do Golden Raspberry Awards.
 
 O arquivo [movies.csv](./src/main/resources/data/movies.csv) contém a lista de filmes e demais informações.
 
-O arquivo [schema.sql](./src/main/resources/schema.sql) contém a definicação da tabela que armazena os registros.
+O arquivo [schema.sql](./src/main/resources/schema.sql) contém a definição da tabela que armazena os registros.
 
 ## Requisitos da API
 
