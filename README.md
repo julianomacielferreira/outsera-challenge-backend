@@ -69,7 +69,39 @@ Torne o arquivo ``mvnw``, no diretório raíz do projeto, executável:
 $ chmod +x mvnw
 ```
 
-Execute o seguinte comando no diretório raiz do projeto:
+Execute os seguinte comando no diretório raiz do projeto para baixar as dependências:
+
+```bash
+$ ./mvnw install
+```
+
+A saída será algo como:
+
+```bash
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.outsera:api >---------------------------
+[INFO] Building api 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+
+...
+
+[INFO] --- install:3.1.4:install (default-install) @ api ---
+[INFO] Installing /home/juliano/Public/outsera-challenge-backend/pom.xml to /home/juliano/.m2/repository/com/outsera/api/0.0.1-SNAPSHOT/api-0.0.1-SNAPSHOT.pom
+[INFO] Installing /home/juliano/Public/outsera-challenge-backend/target/api-0.0.1-SNAPSHOT.jar to /home/juliano/.m2/repository/com/outsera/api/0.0.1-SNAPSHOT/api-0.0.1-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.055 s
+[INFO] Finished at: 2025-10-02T11:26:53-03:00
+[INFO] ------------------------------------------------------------------------
+
+```
+
+Execute os seguinte comando no diretório raiz do projeto para subir a API:
 
 ```bash
 $ ./mvnw spring-boot:run
