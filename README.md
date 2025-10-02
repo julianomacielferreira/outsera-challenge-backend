@@ -52,6 +52,8 @@ prêmios mais rápido, seguindo a especificação de formato definida.
 
 ## Rodando a API
 
+O processo roda na porta 8080. O endereço padrão é http://localhost:8080.
+
 Pré-requisitos:
 
 - Java Development Kit (JDK) 17 ou superior instalado em sua máquina:
