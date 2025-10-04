@@ -50,7 +50,7 @@ prêmios mais rápido, seguindo a especificação de formato definida.
                         └── ApplicationTests.java
 ```
 
-## Rodando a API
+## Como inicializar a API
 
 O projeto roda na porta 8080. O endereço padrão é http://localhost:8080.
 
