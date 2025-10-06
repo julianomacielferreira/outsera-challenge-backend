@@ -15,6 +15,8 @@ prêmios mais rápido, seguindo a especificação de formato definida.
 
 ```
 .
+├── docker-compose.yml
+├── Dockerfile
 ├── LICENSE
 ├── mvnw
 ├── mvnw.cmd
@@ -138,6 +140,45 @@ A saída será algo como:
 2025-10-01T12:54:18.800-03:00  INFO 3864347 --- [api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
 ```
 
+## Usando com Docker e docker-compose
+
+**[Docker](https://docs.docker.com/install/) e [Docker Compose](https://docs.docker.com/compose/install/) devem ser instalados.**
+
+Rode os seguintes comandos no no diretório raiz do projeto:
+
+```bash
+$ docker-compose build
+```
+
+```bash
+$ docker-compose up
+```
+
+A saída será algo como:
+
+```bash
+Creating network "outsera-challenge-backend_default" with the default driver
+Creating outsera-challenge-backend_app_1 ... done
+Attaching to outsera-challenge-backend_app_1
+app_1  | 
+app_1  |   .   ____          _            __ _ _
+app_1  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+app_1  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+app_1  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+app_1  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+app_1  |  =========|_|==============|___/=/_/_/_/
+app_1  | 
+app_1  |  :: Spring Boot ::                (v3.5.6)
+app_1  | 
+app_1  | 2025-10-06T15:37:51.722Z  INFO 1 --- [api] [           main] com.outsera.api.Application              : Starting Application v0.0.1-SNAPSHOT using Java 17-ea with PID 1 (/app/app.jar started by root in /app)
+app_1  | 2025-10-06T15:37:51.726Z  INFO 1 --- [api] [           main] com.outsera.api.Application              : The following 1 profile is active: "dev"
+app_1  | 2025-10-06T15:37:52.477Z  INFO 1 --- [api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+app_1  | 2025-10-06T15:37:52.535Z  INFO 1 --- [api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 1 JPA repository interface.
+app_1  | 2025-10-06T15:37:53.012Z  INFO 1 --- [api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+
+...
+```
+
 ## Testando a API
 
 Execute o seguinte comando na raíz do projeto:
@@ -204,6 +245,8 @@ A saída será algo como:
 [INFO] ------------------------------------------------------------------------
 
 ```
+
+
 
 ## Endpoint
 
