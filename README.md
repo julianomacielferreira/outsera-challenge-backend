@@ -286,4 +286,6 @@ $ curl --location 'http://localhost:8080/api/movies'
 ## Referências
 
 - [**Spring Boot**](https://spring.io/projects/spring-boot)
+- [**Docker**](https://www.docker.com/)
+- [**Docker Compose**](https://docs.docker.com/compose/install/)
 - [**IntelliJ IDEA Community Edition**](https://www.jetbrains.com/idea/download/?section=linux)
