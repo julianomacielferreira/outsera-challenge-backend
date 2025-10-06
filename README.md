@@ -140,7 +140,7 @@ A saída será algo como:
 2025-10-01T12:54:18.800-03:00  INFO 3864347 --- [api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
 ```
 
-## Usando com Docker e docker-compose
+## Inicializando com Docker e docker-compose
 
 **[Docker](https://docs.docker.com/install/) e [Docker Compose](https://docs.docker.com/compose/install/) devem ser instalados.**
 
