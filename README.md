@@ -144,7 +144,7 @@ A saída será algo como:
 
 **[Docker](https://docs.docker.com/install/) e [Docker Compose](https://docs.docker.com/compose/install/) devem ser instalados.**
 
-Rode os seguintes comandos no no diretório raiz do projeto:
+Rode os seguintes comandos no diretório raiz do projeto:
 
 ```bash
 $ docker-compose build
